@@ -211,30 +211,14 @@ local function ShowTaskDialogue(actor, singletask, taskstatus)
     tempCurrY = tempCurrY + 50
 
     msg = msg..'<Text|text=ÈÎÎñ½±Àø:|x='..tempCurrX..'|y='..tempCurrY..'|color='..CSS.NPC_LIGHTGREEN..'>'
-    local rewardstrlist = {}
     if singletask.reward_tab then
         local finalrewardtab = Player.FilterTable(actor, singletask.reward_tab)  
-        local tempstr = ''
-        local i = 0
-        for _, reward in ipairs(finalrewardtab) do            
-            if tempstr ~= '' then
-                tempstr = tempstr..';   '
-            end
-            tempstr = tempstr..reward.name..'X'..reward.num;
-            i = i + 1
-            if i % 2 == 0 then
-                rewardstrlist[#rewardstrlist+1] = tempstr
-                tempstr = ''
-            end
+        for _, reward in ipairs(finalrewardtab) do  
+            local itemidx = getstditeminfo(reward.name, CommonDefine.STDITEMINFO_IDX)
+            msg = msg..'<ItemShow|x='..(tempCurrX+100)..'|y='..tempCurrY..'|width=70|height=70|itemid='..itemidx..'|itemcount='..reward.num..'|bgtype=1|showtips=1>'
+            tempCurrX = tempCurrX + 70
         end
-        if tempstr ~= '' then
-            rewardstrlist[#rewardstrlist+1] = tempstr 
-        end
-    end 
-    for _, showstr in ipairs(rewardstrlist) do
-        msg = msg..'<Text|text='..showstr..'|x='..(tempCurrX+100)..'|y='..tempCurrY..'|color='..CSS.NPC_WHITE..'>'
-        tempCurrY = tempCurrY + 30
-    end    
+    end  
 
     tempCurrX = CSS.NPC_LEFT_START_X + 380
     tempCurrY = CSS.NPC_TOP_START_Y + 200

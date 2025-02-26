@@ -92,7 +92,7 @@ GameEventManager.AddListener(CommonDefine.EVENT_NAME_KILL_PLAYER, GuanZhiManager
 ---------------------------通用npc对话----------------------------------------
 
 function GuanZhiManager.ShowRulePanel(actor)
-    local strPanelInfo = '<Img|id=10|children={11,12,21,22,23,24,25,26}|x=268.0|y=69.0|show=0|esc=1|reset=1|img=private/cc_common/rule_panel.png|bg=1|move=0>'..
+    local strPanelInfo = '<Img|id=10|children={11,12,21,22,23,24,25,26,27}|x=268.0|y=69.0|show=0|esc=1|reset=1|img=private/cc_common/rule_panel.png|bg=1|move=0>'..
         '<Layout|id=11|x=525.0|y=-1.0|width=80|height=80|link=@show_base_panel>'..
         '<Button|id=12|x=528.0|y=0.0|nimg=public/1900000510.png|pimg=public/1900000511.png|link=@show_base_panel>'
 
@@ -100,15 +100,13 @@ function GuanZhiManager.ShowRulePanel(actor)
     local tempCurrY = 50
     strPanelInfo = strPanelInfo..'<Text|id=21|text=官职系统规则说明:|size=20|x='..tempCurrX..'|y='..tempCurrY..'|color='..CSS.NPC_LIGHTGREEN..'>'
     tempCurrY = tempCurrY + 35
-    strPanelInfo = strPanelInfo..'<Text|id=22|text=1、官职主要通过在游戏中击败其他玩家所获得功勋值的|x='..tempCurrX..'|y='..tempCurrY..'|color='..CSS.NPC_WHITE..'>'
+    strPanelInfo = strPanelInfo..'<Text|id=22|text=1、游戏中击败其他玩家或者击毁其他玩家的镖车后可以获得|x='..tempCurrX..'|y='..tempCurrY..'|color='..CSS.NPC_WHITE..'>'
     tempCurrY = tempCurrY + 30
-    strPanelInfo = strPanelInfo..'<Text|id=23|text=累积来提升。|x='..tempCurrX..'|y='..tempCurrY..'|color='..CSS.NPC_WHITE..'>'
+    strPanelInfo = strPanelInfo..'<Text|id=23|text=大量战功。|x='..tempCurrX..'|y='..tempCurrY..'|color='..CSS.NPC_WHITE..'>'
     tempCurrY = tempCurrY + 30
-    strPanelInfo = strPanelInfo..'<Text|id=24|text=2、玩家每天可在游戏中获得的功勋值数量有上限设定。|x='..tempCurrX..'|y='..tempCurrY..'|color='..CSS.NPC_WHITE..'>'
+    strPanelInfo = strPanelInfo..'<Text|id=24|text=2、战功有每日获取上限的设定，达到每日上限后将不再累积。|x='..tempCurrX..'|y='..tempCurrY..'|color='..CSS.NPC_WHITE..'>'
     tempCurrY = tempCurrY + 30
-    strPanelInfo = strPanelInfo..'<Text|id=25|text=3、官职提升之后除了带来大量的属性加成之外，还会对|x='..tempCurrX..'|y='..tempCurrY..'|color='..CSS.NPC_WHITE..'>'
-    tempCurrY = tempCurrY + 30
-    strPanelInfo = strPanelInfo..'<Text|id=26|text=低于自身官职等级的其他玩家带来额外的伤害加成。|x='..tempCurrX..'|y='..tempCurrY..'|color='..CSS.NPC_WHITE..'>'
+    strPanelInfo = strPanelInfo..'<Text|id=25|text=3、当前官职所需战功数量达到之后将会自动升职，无需点击。|x='..tempCurrX..'|y='..tempCurrY..'|color='..CSS.NPC_WHITE..'>' 
 
     BF_ShowSpecialUI(actor, strPanelInfo)    
 end
