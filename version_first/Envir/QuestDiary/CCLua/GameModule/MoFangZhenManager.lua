@@ -450,6 +450,21 @@ local function DoBuyTimes(actor)
     Player.SendSelfMsg(actor, '购买1次魔方阵挑战次数！', CommonDefine.MSG_POS_TYPE_SYS_CHANNEL)
 end
 
+--使用魔方阵凭证增加次数
+function MoFangZhenManager.DoAddTimesByItem(actor)
+    local currbuytimes = getplaydef(actor, CommonDefine.VAR_J_DAY_MOFANG_BUYTIMES)
+    if currbuytimes >= CommonDefine.MOFANGZHEN_DAY_MAX_BUY_TIMES then
+        Player.SendSelfMsg(actor, '今日魔方阵增加次数已用完！', CommonDefine.MSG_POS_TYPE_SYS_CHANNEL)
+        return false
+    end
+
+    setplaydef(actor, CommonDefine.VAR_J_DAY_MOFANG_BUYTIMES, currbuytimes + 1)
+    local totalbuytimes = getplaydef(actor, CommonDefine.VAR_U_MOFANG_LEFT_BUYTIMES) + 1
+    setplaydef(actor, CommonDefine.VAR_U_MOFANG_LEFT_BUYTIMES, totalbuytimes)
+    Player.SendSelfMsg(actor, '增加1次魔方阵挑战次数！', CommonDefine.MSG_POS_TYPE_SYS_CHANNEL)
+    return true
+end
+
 --前往魔方地图
 local function GoToMoFang(actor, id)
     if not Player.IsFunctionOpen(actor, CommonDefine.FUNC_ID_MOFANGZHEN, false) then

@@ -5,9 +5,10 @@ function ItemUseManager.DoUse(actor, itemobj)
     if BF_IsNullObj(actor) or BF_IsNullObj(itemobj) then
         return false
     end
-
+release_print('111111')
     local itemid = getiteminfo(actor, itemobj, CommonDefine.ITEMINFO_ITEMIDX)
     local anicount = getstditeminfo(itemid, CommonDefine.STDITEMINFO_ANICOUNT)
+release_print('anicount:'..anicount)    
     if anicount == 0 then
         Player.SendSelfMsg(actor, '道具功能还未开启！', CommonDefine.MSG_POS_TYPE_SYS_CHANNEL)
         return false
@@ -80,6 +81,9 @@ function ItemUseManager.DoUse(actor, itemobj)
 
         BF_ShowSpecialUI(actor, msg)
         return false
+    elseif anicount == 205 then
+        --魔方阵凭证
+        return MoFangZhenManager.DoAddTimesByItem(actor)
     end
 end
 

@@ -439,6 +439,11 @@ function stdmodefunc204(actor, itemobj)
     return ItemUseManager.DoUse(actor, itemobj)
 end
 
+--使用魔方阵凭证
+function stdmodefunc205(actor, itemobj)
+    return ItemUseManager.DoUse(actor, itemobj)
+end
+
 
 ----------------------------------------------------------------使用道具回调end--------------------------------------------------------------------------
 
