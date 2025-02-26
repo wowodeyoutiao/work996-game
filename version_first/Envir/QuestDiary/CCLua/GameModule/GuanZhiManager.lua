@@ -1,12 +1,12 @@
 GuanZhiManager = {}
 
 --functionid
-local NPCPANEL_BUTTONFUNC_ID_1 = 1      --领取战功奖励
+local NPCPANEL_BUTTONFUNC_ID_1 = 1      --领取功勋奖励
 
 
 
-GuanZhiManager.KILL_PLAYER_ADDEXP_PER = 100         --每次击杀获得战功
-GuanZhiManager.DAY_ADD_GUANZHI_EXP_MAX = 1000       --每天可以获得的最大战功
+GuanZhiManager.KILL_PLAYER_ADDEXP_PER = 100         --每次击杀获得功勋
+GuanZhiManager.DAY_ADD_GUANZHI_EXP_MAX = 1000       --每天可以获得的最大功勋
 
 function GuanZhiManager.SetTitle(actor, titleitemname)
     for _, cfginfo in ipairs(cfgGuanZhi) do
@@ -190,13 +190,13 @@ function GuanZhiManager.ShowBasePanel(actor)
     else
         local leftexp = math.max(0, cfgGuanZhi[currlv].upgradeneedexp-currexp)
         local dayaddexp = getplaydef(actor, CommonDefine.VAR_J_DAY_GUAZHI_ADDEXP)
-        strPanelInfo = strPanelInfo..'<Text|id=61|text=战功积累:|size=18|x='..tempCurrX..'|y='..tempCurrY..'|color='..CSS.NPC_YELLOW..'>'..
+        strPanelInfo = strPanelInfo..'<Text|id=61|text=功勋积累:|size=18|x='..tempCurrX..'|y='..tempCurrY..'|color='..CSS.NPC_YELLOW..'>'..
                     '<Text|id=62|text='..currexp..'/'..cfgGuanZhi[currlv].upgradeneedexp..'|size=18|x='..(tempCurrX+100)..'|y='..tempCurrY..'|color='..CSS.NPC_WHITE..'>'..
-                    '<Text|id=63|text=(晋升下一级还需要'..leftexp..'点战功)|size=18|x='..(tempCurrX+240)..'|y='..tempCurrY..'|color='..CSS.NPC_WHITE..'>'
+                    '<Text|id=63|text=(晋升下一级还需要'..leftexp..'点功勋)|size=18|x='..(tempCurrX+240)..'|y='..tempCurrY..'|color='..CSS.NPC_WHITE..'>'
         tempCurrY = tempCurrY + 30
-        strPanelInfo = strPanelInfo..'<Text|id=64|text=可获取战功:|size=18|x='..tempCurrX..'|y='..tempCurrY..'|color='..CSS.NPC_YELLOW..'>'..
+        strPanelInfo = strPanelInfo..'<Text|id=64|text=可获取功勋:|size=18|x='..tempCurrX..'|y='..tempCurrY..'|color='..CSS.NPC_YELLOW..'>'..
                     '<Text|id=65|text='..dayaddexp..'/'..GuanZhiManager.DAY_ADD_GUANZHI_EXP_MAX..'|size=18|x='..(tempCurrX+100)..'|y='..tempCurrY..'|color='..CSS.NPC_WHITE..'>'..
-                    '<Text|id=66|text=(今日战功获得达上限后不再增加)|size=18|x='..(tempCurrX+240)..'|y='..tempCurrY..'|color='..CSS.NPC_WHITE..'>'
+                    '<Text|id=66|text=(今日功勋获得达上限后不再增加)|size=18|x='..(tempCurrX+240)..'|y='..tempCurrY..'|color='..CSS.NPC_WHITE..'>'
     end
     tempCurrX = 200
     tempCurrY = tempCurrY + 40

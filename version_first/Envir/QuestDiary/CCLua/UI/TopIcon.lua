@@ -347,7 +347,7 @@ function TopIcon.InnerGMModePanel(actor)
                       
                       '<Button|x=200|y=60|nimg=public/bg_hhzy_01_3.png|text=清空装备小极品|link=@topicon_dogmoper,11>'..
                       '<Button|x=200|y=90|nimg=public/bg_hhzy_01_3.png|text=测试自定义属性|link=@topicon_dogmoper,12>'..                      
-                      '<Button|x=200|y=150|nimg=public/bg_hhzy_01_3.png|text=增加500战功|link=@topicon_dogmoper,14>'..                      
+                      '<Button|x=200|y=150|nimg=public/bg_hhzy_01_3.png|text=增加500功勋|link=@topicon_dogmoper,14>'..                      
                       '<Button|x=350|y=60|nimg=public/bg_hhzy_01_3.png|text=增加八格背包|link=@topicon_dogmoper,16>'..                      
                       
                       '<Button|x=350|y=150|nimg=public/bg_hhzy_01_3.png|text=随机清空地图|link=@topicon_dogmoper,19>'..

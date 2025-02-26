@@ -71,14 +71,22 @@ function Player.FullHPMP(actor)
     addmpper(actor, '=', 100)
 end
 
---返回比奇安全区
-function Player.GoBQHome(actor)
-    mapmove(actor, '0', 326, 272, 3)
+--返回安全区 满血满蓝
+function Player.GoHome(actor)
+    gohome(actor)
+    Player.FullHPMP(actor)
 end
 
---返回盟重安全区
+--返回比奇安全区 满血满蓝
+function Player.GoBQHome(actor)
+    mapmove(actor, '0', 326, 272, 3)
+    Player.FullHPMP(actor)
+end
+
+--返回盟重安全区 满血满蓝
 function Player.GoMZHome(actor)
     mapmove(actor, '3', 330, 330, 3)
+    Player.FullHPMP(actor)
 end
 
 --返回所在地图的坐标

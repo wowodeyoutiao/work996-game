@@ -130,7 +130,7 @@ function RandomBossManager.DoMapButton(actor, sid)
         if Player.IsDead(actor) then
             realive(actor)                       
         end        
-        gohome(actor) 
+        Player.GoHome(actor)
 	elseif funcid == INNER_BUTTONFUNC_ID_4 then
         if Player.IsDead(actor) then
             realive(actor)                       
@@ -235,7 +235,7 @@ function RandomBossManager.ClearFightingMap(mapidstr)
 
 		local mapplayers = getplaycount(mapidstr,0,0)
 		for _, player in ipairs(type(mapplayers) == "table" and mapplayers or {}) do
-			gohome(player)
+			Player.GoHome(player)
 		end		
 	end
 end

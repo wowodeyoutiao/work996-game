@@ -206,8 +206,8 @@ local function DoFinalPiledItemCompose(actor, cfgComposeTab)
 	return bSuccessFlag, newitemid
 end
 
-function ItemComposeManager.ShowBasePanel(actor)
-    local strPanelInfo = '<Img|id=10|children={11,12,13,21,22,23,24,25,26,40,51,52,53,61,62,63,71,72}|x=31.0|y=19.0|img=private/cc_compose/12.png|move=0|show=0|reset=1|esc=1|bg=1|loadDelay=0>'..
+function ItemComposeManager.ShowBasePanel(actor, makeindex, itemlist)
+    local strPanelInfo = '<Img|id=10|children={11,12,13,21,22,23,24,25,26,40,51,52,53,61,62,63,71,72,80}|x=31.0|y=19.0|img=private/cc_compose/12.png|move=0|show=0|reset=1|esc=1|bg=1|loadDelay=0>'..
         '<Layout|id=11|x=813.0|y=14.0|width=80|height=80|link=@exit>'..
         '<Button|id=12|x=814.0|y=14.0|nimg=public/1900000510.png|pimg=public/1900000511.png|link=@exit>'..
 		'<Button|id=13|x=700.0|y=14.0|esc=0|nimg=private/cc_common/button_help.png|pimg=private/cc_common/button_help.png|link=@show_rule_panel>'
@@ -279,6 +279,37 @@ function ItemComposeManager.ShowBasePanel(actor)
         strPanelInfo = strPanelInfo..'<Text|id=72|text=下一页|x=460|y=460|color='..CSS.NPC_WHITE..'|link=@itemcompose_button,'..COMPOSE_BUTTONFUNC_ID_3..'>'
     end	
 
+	local tempparam = getplaydef(actor, CommonDefine.VAR_N_NPC_TEMPPARAM1)	
+	if tempparam == -1 then
+		strPanelInfo = strPanelInfo..'<Img|id=80|children={81,82,83,84}|x=300.0|y=180.0|img=private/cc_compose/11.png|move=0|show=0|reset=1|esc=1|bg=1|loadDelay=0>'..
+			'<Text|id=81|x=160.0|y=15.0|color=151|size=20|text=合成结果>'..
+			'<Text|id=82|x=70.0|y=80.0|color=255|size=18|text=合成失败，不要灰心，下次会有好运！>'..
+			'<Button|id=83|x=150.0|y=155.0|color=255|mimg=private/cc_compose/3.png|nimg=private/cc_compose/3.png|size=18|text=确定|link=@itemcompose_button,'..COMPOSE_BUTTONFUNC_ID_1..'>'
+	elseif tempparam == 1 then
+		if makeindex ~= nil then
+			strPanelInfo = strPanelInfo..'<Img|id=80|children={81,82,83,84}|x=300.0|y=180.0|img=private/cc_compose/11.png|move=0|show=0|reset=1|esc=1|bg=1|loadDelay=0>'..
+				'<Text|id=81|x=160.0|y=15.0|color=151|size=20|text=合成结果>'..
+				'<Text|id=82|x=40.0|y=60.0|color=255|size=18|text=恭喜获得：>'..
+				'<Button|id=83|x=150.0|y=155.0|color=255|mimg=private/cc_compose/3.png|nimg=private/cc_compose/3.png|size=18|text=确定|link=@itemcompose_button,'..COMPOSE_BUTTONFUNC_ID_1..'>'..
+				'<MKItemShow|id=84|x=160|y=80|makeindex='..makeindex..'|count=1|showtips=1|bgtype=1|canmove=0>'	
+		end
+	elseif tempparam == 2 then
+		if itemlist ~= nil then
+			local idstr = ''
+			for key, _ in ipairs(itemlist) do
+				idstr = idstr..','..(90+key)
+			end
+			strPanelInfo = strPanelInfo..'<Img|id=80|children={81,82,83'..idstr..'}|x=300.0|y=180.0|img=private/cc_compose/11.png|move=0|show=0|reset=1|esc=1|bg=1|loadDelay=0>'..
+				'<Text|id=81|x=160.0|y=15.0|color=151|size=20|text=合成结果>'..
+				'<Text|id=82|x=40.0|y=60.0|color=255|size=18|text=恭喜获得：>'..
+				'<Button|id=83|x=150.0|y=155.0|color=255|mimg=private/cc_compose/3.png|nimg=private/cc_compose/3.png|size=18|text=确定|link=@itemcompose_button,'..COMPOSE_BUTTONFUNC_ID_1..'>'
+			for key, value in ipairs(itemlist) do
+				local currx = 40 + 70 * (key-1)
+				strPanelInfo = strPanelInfo..'<ItemShow|id='..(90+key)..'|x='..currx..'|y=80|itemid='..value.id..'|itemcount='..value.num..'|bgtype=1|showtips=1>'
+			end							
+		end
+	end
+
     BF_ShowSpecialUI(actor, strPanelInfo)
 end
 
@@ -295,9 +326,10 @@ function ItemComposeManager.ChooseOtherItemPanel(actor)
         return
     end	
 
-    local strPanelInfo = '<Img|id=10|children={11,12,21,22,23,24,25,26,40,51,52,53,61,62,63,80}|x=31.0|y=19.0|img=private/cc_compose/12.png|move=0|show=0|reset=1|esc=1|bg=1|loadDelay=0>'..
+    local strPanelInfo = '<Img|id=10|children={11,12,13,21,22,23,24,25,26,40,51,52,53,61,62,63,80}|x=31.0|y=19.0|img=private/cc_compose/12.png|move=0|show=0|reset=1|esc=1|bg=1|loadDelay=0>'..
         '<Layout|id=11|x=813.0|y=14.0|width=80|height=80|link=@exit>'..
-        '<Button|id=12|x=814.0|y=14.0|nimg=public/1900000510.png|pimg=public/1900000511.png|link=@exit>'
+        '<Button|id=12|x=814.0|y=14.0|nimg=public/1900000510.png|pimg=public/1900000511.png|link=@exit>'..
+		'<Button|id=13|x=700.0|y=14.0|esc=0|nimg=private/cc_common/button_help.png|pimg=private/cc_common/button_help.png|link=@show_rule_panel>'
 
 	local composetype = getplaydef(actor, CommonDefine.VAR_N_LAST_NPC_CHOOSEID)
 	if composetype == 0 then
@@ -503,37 +535,34 @@ end
 
 --返回合成成功的单个装备
 local function show_success_panel(actor, makeindex)
-	local strPanelInfo = '<Img|id=80|children={81,82,83,84}|x=300.0|y=180.0|img=private/cc_compose/11.png|move=0|show=0|reset=1|esc=1|bg=1|loadDelay=0>'..
-		'<Text|id=81|x=160.0|y=15.0|color=151|size=20|text=合成结果>'..
-		'<Text|id=82|x=40.0|y=60.0|color=255|size=18|text=恭喜获得：>'..
-		'<Button|id=83|x=150.0|y=155.0|color=255|mimg=private/cc_compose/3.png|nimg=private/cc_compose/3.png|size=18|text=确定|link=@itemcompose_button,'..COMPOSE_BUTTONFUNC_ID_1..'>'..
-		'<MKItemShow|id=84|x=160|y=80|makeindex='..makeindex..'|count=1|showtips=1|bgtype=1|canmove=0>'	
-	BF_ShowSpecialUI(actor, strPanelInfo)
+	setplaydef(actor, CommonDefine.VAR_N_NPC_TEMPPARAM1, 1)
+
+	setplaydef(actor, CommonDefine.VAR_N_CURR_NPC_DATA_PAGE1, 0)
+	setplaydef(actor, CommonDefine.VAR_N_ITEM_COMPOSE_CHOOSE_ITEM1, 0)
+	setplaydef(actor, CommonDefine.VAR_S_SELECT_COMPOSE_ITEMS, '')
+	setplaydef(actor, CommonDefine.VAR_N_SELECT_COMPOSE_PILE_NUM, 0)
+	ItemComposeManager.ShowBasePanel(actor, makeindex, nil)	
 end
 
 --返回合成成功的道具列表
-local function show_success_panel_ex(actor, itemlist)
-	local idstr = ''
-	for key, _ in ipairs(itemlist) do
-		idstr = idstr..','..(90+key)
-	end
-	local strPanelInfo = '<Img|id=80|children={81,82,83'..idstr..'}|x=300.0|y=180.0|img=private/cc_compose/11.png|move=0|show=0|reset=1|esc=1|bg=1|loadDelay=0>'..
-		'<Text|id=81|x=160.0|y=15.0|color=151|size=20|text=合成结果>'..
-		'<Text|id=82|x=40.0|y=60.0|color=255|size=18|text=恭喜获得：>'..
-		'<Button|id=83|x=150.0|y=155.0|color=255|mimg=private/cc_compose/3.png|nimg=private/cc_compose/3.png|size=18|text=确定|link=@itemcompose_button,'..COMPOSE_BUTTONFUNC_ID_1..'>'
-	for key, value in ipairs(itemlist) do
-		local currx = 40 + 70 * (key-1)
-		strPanelInfo = strPanelInfo..'<ItemShow|id='..(90+key)..'|x='..currx..'|y=80|itemid='..value.id..'|itemcount='..value.num..'|bgtype=1|showtips=1>'
-	end			
-	BF_ShowSpecialUI(actor, strPanelInfo)
+local function  show_success_panel_ex(actor, itemlist)
+	setplaydef(actor, CommonDefine.VAR_N_NPC_TEMPPARAM1, 2)
+
+	setplaydef(actor, CommonDefine.VAR_N_CURR_NPC_DATA_PAGE1, 0)
+	setplaydef(actor, CommonDefine.VAR_N_ITEM_COMPOSE_CHOOSE_ITEM1, 0)
+	setplaydef(actor, CommonDefine.VAR_S_SELECT_COMPOSE_ITEMS, '')
+	setplaydef(actor, CommonDefine.VAR_N_SELECT_COMPOSE_PILE_NUM, 0)
+	ItemComposeManager.ShowBasePanel(actor, 0, itemlist)		
 end
 
 local function show_fail_panel(actor)
-	local strPanelInfo = '<Img|id=80|children={81,82,83,84}|x=300.0|y=180.0|img=private/cc_compose/11.png|move=0|show=0|reset=1|esc=1|bg=1|loadDelay=0>'..
-		'<Text|id=81|x=160.0|y=15.0|color=151|size=20|text=合成结果>'..
-		'<Text|id=82|x=70.0|y=80.0|color=255|size=18|text=合成失败，不要灰心，下次会有好运！>'..
-		'<Button|id=83|x=150.0|y=155.0|color=255|mimg=private/cc_compose/3.png|nimg=private/cc_compose/3.png|size=18|text=确定|link=@itemcompose_button,'..COMPOSE_BUTTONFUNC_ID_1..'>'
-	BF_ShowSpecialUI(actor, strPanelInfo)
+	setplaydef(actor, CommonDefine.VAR_N_NPC_TEMPPARAM1, -1)
+
+	setplaydef(actor, CommonDefine.VAR_N_CURR_NPC_DATA_PAGE1, 0)
+	setplaydef(actor, CommonDefine.VAR_N_ITEM_COMPOSE_CHOOSE_ITEM1, 0)
+	setplaydef(actor, CommonDefine.VAR_S_SELECT_COMPOSE_ITEMS, '')
+	setplaydef(actor, CommonDefine.VAR_N_SELECT_COMPOSE_PILE_NUM, 0)
+	ItemComposeManager.ShowBasePanel(actor, 0, nil)	
 end
 
 --合成不可叠加道具

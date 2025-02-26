@@ -71,13 +71,13 @@ function SingleBossManager.DoMapButton(actor, sid)
     local funcid = tonumber(sid)
     if funcid == SINGLEBOSS_BUTTONFUNC_ID_1 then
         --返回安全区
-        gohome(actor)
+        Player.GoHome(actor)
     elseif funcid == SINGLEBOSS_BUTTONFUNC_ID_3 then
         --复活并返回安全区
         if Player.IsDead(actor) then
             realive(actor)                       
         end        
-        gohome(actor) 
+        Player.GoHome(actor)
     elseif funcid == SINGLEBOSS_BUTTONFUNC_ID_4 then
         --原地复活        
         if not Player.IsDead(actor) then
@@ -187,7 +187,7 @@ function SingleBossManager.ClearFightingMap(mapidstr)
 	if mapidstr ~= '' then
 		local mapplayers = getplaycount(mapidstr,0,0)
 		for _, player in ipairs(type(mapplayers) == "table" and mapplayers or {}) do
-			gohome(player)
+			Player.GoHome(player)
 		end
 	end
 end

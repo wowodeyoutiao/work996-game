@@ -277,7 +277,7 @@ end
 
 function common_relive_button(actor)
     realive(actor)
-    gohome(actor)
+    Player.GoHome(actor)
 end
 
 function firstrecharge_button(actor, sid)

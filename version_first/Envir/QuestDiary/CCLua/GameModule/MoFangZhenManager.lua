@@ -93,7 +93,7 @@ function MoFangZhenManager.OnTimerCheck(actor)
         if Player.IsDead(actor) then
             realive(actor)
         end        
-        gohome(actor) 
+        Player.GoHome(actor)
     elseif totalstayseconds < pastseconds + 60 then
         --还有一分钟，看是否满足自动补时间
         if getflagstatus(actor, CommonDefine.VAR_HUM_BITFLAG_MFZ_ADDTIME_FLAG2) == 1 then
@@ -140,7 +140,7 @@ function MoFangZhenManager.DoMapButton(actor, sid)
         if Player.IsDead(actor) then
             realive(actor)           
         end        
-        gohome(actor)         
+        Player.GoHome(actor)     
     elseif funcid == INNER_BUTTONFUNC_ID_4 then
         --原地复活        
         if not Player.IsDead(actor) then
@@ -149,7 +149,7 @@ function MoFangZhenManager.DoMapButton(actor, sid)
         realive(actor)
     elseif funcid == INNER_BUTTONFUNC_ID_5 then
         --返回主城安全区
-        gohome(actor)
+        Player.GoHome(actor)
     elseif funcid == INNER_BUTTONFUNC_ID_6 then
         --关闭对话框
         close(actor)

@@ -36,13 +36,13 @@ function PublicBossManager.DoMapButton(actor, sid)
     local funcid = tonumber(sid)
     if funcid == PUBLICBOSS_BUTTONFUNC_ID_1 then
         --返回安全区
-        gohome(actor)
+        Player.GoHome(actor)
     elseif funcid == PUBLICBOSS_BUTTONFUNC_ID_3 then
         --复活并返回安全区
         if Player.IsDead(actor) then
             realive(actor)                       
         end        
-        gohome(actor) 
+        Player.GoHome(actor)
     elseif funcid == PUBLICBOSS_BUTTONFUNC_ID_4 then
         --原地复活        
         if not Player.IsDead(actor) then

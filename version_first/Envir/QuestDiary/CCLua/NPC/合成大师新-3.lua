@@ -6,6 +6,7 @@ function main(actor)
         return
     end
     setplaydef(actor, CommonDefine.VAR_N_LAST_NPC_CHOOSEID, 0)
+    setplaydef(actor, CommonDefine.VAR_N_NPC_TEMPPARAM1, 0)
     show_base_panel(actor)
 end
 

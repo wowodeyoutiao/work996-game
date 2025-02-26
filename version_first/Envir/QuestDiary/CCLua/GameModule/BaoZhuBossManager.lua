@@ -99,7 +99,7 @@ function BaoZhuBossManager.DoMapButton(actor, sid)
     local funcid = tonumber(sid)
     if funcid == BAOZHUBOSS_BUTTONFUNC_ID_1 then
         --返回安全区
-        gohome(actor)
+        Player.GoHome(actor)
     elseif funcid == BAOZHUBOSS_BUTTONFUNC_ID_2 then
         --行会求助
         local mapidstr = Player.GetMapIDStr(actor)
@@ -115,7 +115,7 @@ function BaoZhuBossManager.DoMapButton(actor, sid)
         if Player.IsDead(actor) then
             realive(actor)                       
         end        
-        gohome(actor) 
+        Player.GoHome(actor)
     elseif funcid == BAOZHUBOSS_BUTTONFUNC_ID_4 then
         --原地复活        
         if not Player.IsDead(actor) then

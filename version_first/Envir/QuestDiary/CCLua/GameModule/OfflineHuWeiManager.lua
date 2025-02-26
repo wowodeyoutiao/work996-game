@@ -193,7 +193,7 @@ function OfflineHuWeiManager.DoMapButton(actor, sid)
 
     local funcid = tonumber(sid)
     if funcid == ZCD_BUTTONFUNC_ID_1 then
-		gohome(actor)
+		Player.GoHome(actor)
     end
 end
 
