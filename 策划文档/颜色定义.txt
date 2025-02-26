@@ -1,0 +1,18 @@
+    --装备品质颜色
+    QUALITY_WHITE = 255,
+    QUALITY_GREEN = 223,
+    QUALITY_BLUE = 154,
+    QUALITY_PURPLE = 241,
+    QUALITY_PINK = 253,
+    QUALITY_ORANGE = 116,
+    QUALITY_RED = 22,
+    
+    --NPC文本颜色
+    NPC_WHITE = 161,
+    NPC_LIGHTGREEN = 215,
+    NPC_YELLOW = 151,
+    NPC_RED = 58,
+    NPC_ORANGE = 70,
+    NPC_BLUE = 146,
+    NPC_PURPLE = 241,
+    NPC_PINK = 245,
